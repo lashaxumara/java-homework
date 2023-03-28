@@ -1,6 +1,9 @@
 package ge.tbc.testautomation.javaOOP.figures;
 
-public class Circle {
+import ge.tbc.testautomation.exceptionsStringOperationsRegex.LimitException;
+import ge.tbc.testautomation.exceptionsStringOperationsRegex.RadiusException;
+
+public class Circle extends Figure {
     private double radius;
 
     public double getRadius() {
@@ -13,8 +16,18 @@ public class Circle {
 
     public Circle(double radius) {
         this.radius = radius;
-        numberOfCircleInstances++;
+        if (radius > 0) {
+            System.out.println("Radius is valid!");
+        } else {
+            throw new RadiusException("RADIUS VALUE NOT VALID");
+        }
+
+        if (numberOfInstances < 5) {
+            System.out.println("numberOfInstances is less than 5");
+        } else {
+            throw new LimitException("INSTANTIATION LIMIT REACHED");
+        }
     }
 
-    public static int numberOfCircleInstances = 0;
+
 }
