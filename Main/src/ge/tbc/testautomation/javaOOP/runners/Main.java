@@ -9,7 +9,7 @@ import java.util.TreeSet;
 public class Main {
     static Circle circle = new Circle(2.0);
     static Circle circle1 = new Circle(1.0);
-    static Circle circle2= new Circle(3.0);
+    static Circle circle2 = new Circle(3.0);
     static Circle circle3 = new Circle(2.0);
 
     public static void main(String[] args) {
@@ -31,11 +31,11 @@ public class Main {
         System.out.println("TreeSet: " + newTreeSet);
 
         Set<Circle> newSet = new HashSet<>();
-        newSet.add(new Circle(4.0));
-        newSet.add(new Circle(5.0));
+        newSet.add(circle);
+        newSet.add(circle);
         newSet.add(new Circle(15.0));
         newSet.add(new Circle(15.0));
-        newSet.add(new Circle(15.0));
+        newSet.add(new Circle(18.0));
         newSet.add(new Circle(9.0));
         newSet.add(new Circle(10.0));
         newSet.add(new Circle(8.0));
