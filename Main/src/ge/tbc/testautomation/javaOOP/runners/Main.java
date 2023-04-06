@@ -1,47 +1,63 @@
 package ge.tbc.testautomation.javaOOP.runners;
 
-import ge.tbc.testautomation.javaOOP.figures.Circle;
+import ge.tbc.testautomation.annotationsAndComparators.Analyzable;
+import ge.tbc.testautomation.annotationsAndComparators.Rectangle;
+import ge.tbc.testautomation.annotationsAndComparators.RectangleComparator;
+import ge.tbc.testautomation.annotationsAndComparators.VariableNameAnnotation;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 
 public class Main {
-    static Circle circle = new Circle(2.0);
-    static Circle circle1 = new Circle(1.0);
-    static Circle circle2 = new Circle(3.0);
-    static Circle circle3 = new Circle(2.0);
-
     public static void main(String[] args) {
-        System.out.println(circle.compareTo(circle1));
-        System.out.println(circle.compareTo(circle2));
-        System.out.println(circle.compareTo(circle3));
 
-        TreeSet<Circle> newTreeSet = new TreeSet<>();
-        newTreeSet.add(new Circle(13.0));
-        newTreeSet.add(new Circle(2.0));
-        newTreeSet.add(new Circle(3.0));
-        newTreeSet.add(new Circle(6.0));
-        newTreeSet.add(new Circle(5.0));
-        newTreeSet.add(new Circle(6.0));
-        newTreeSet.add(new Circle(9.0));
-        newTreeSet.add(new Circle(4.0));
-        newTreeSet.add(new Circle(9.0));
-        newTreeSet.add(new Circle(12.0));
-        System.out.println("TreeSet: " + newTreeSet);
+        Analyzable analize = new Analyzable();
+        Field[] myFields = analize.getClass().getDeclaredFields();
+        for (Field field : myFields) {
+            if (field.isAnnotationPresent(VariableNameAnnotation.class)) {
+                VariableNameAnnotation annotation = field.getAnnotation(VariableNameAnnotation.class);
+                String annotatedName = annotation.name();
+                String fieldName = field.getName();
+                if (annotatedName.equalsIgnoreCase(fieldName)) {
 
-        Set<Circle> newSet = new HashSet<>();
-        newSet.add(circle);
-        newSet.add(circle);
-        newSet.add(new Circle(15.0));
-        newSet.add(new Circle(15.0));
-        newSet.add(new Circle(18.0));
-        newSet.add(new Circle(9.0));
-        newSet.add(new Circle(10.0));
-        newSet.add(new Circle(8.0));
-        newSet.add(new Circle(4.0));
-        newSet.add(new Circle(7.0));
-        System.out.println("HashSet: " + newSet);
+                } else {
+                    System.out.println("VARIABLE NAME MISMATCH FOUND.");
+                }
+            }
+        }
+        @SuppressWarnings("unused")
+        int phoneNumber;
+        @SuppressWarnings("unused")
+        String customreName;
+
+        ArrayList<Integer> randomNumbers = new ArrayList();
+        Integer[] numbers = {3, 2, 6, 7, 9, 13, 16, 4, 8, 15};
+        randomNumbers.addAll(Arrays.asList(numbers));
+        Collections.sort(randomNumbers);
+        System.out.println(randomNumbers);
+
+        RectangleComparator rectangleComparator = new RectangleComparator();
+        Rectangle rectangle = new Rectangle(7, 3);
+        Rectangle rectangle1 = new Rectangle(6, 3);
+        Rectangle rectangle2 = new Rectangle(9, 4);
+        Rectangle rectangle3 = new Rectangle(7, 3);
+        System.out.println(rectangleComparator.compare(rectangle, rectangle1));
+        System.out.println(rectangleComparator.compare(rectangle, rectangle2));
+        System.out.println(rectangleComparator.compare(rectangle, rectangle3));
+
+        List<Rectangle> rectangleList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            int width = (int) (Math.random() * 10) + 1;
+            int height = (int) (Math.random() * 10) + 1;
+            rectangleList.add(new Rectangle(width, height));
+        }
+
+        Collections.sort(rectangleList, new RectangleComparator());
+        System.out.println(rectangleList);
     }
 }
 

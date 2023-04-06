@@ -24,12 +24,7 @@ public class Circle implements Comparable<Circle> {
 
     @Override
     public int compareTo(Circle otherCircle) {
-        if (this.radius < otherCircle.radius) {
-            return -1;
-        } else if (this.radius > otherCircle.radius) {
-            return 1;
-        } else {
-            return 0;
-        }
+        return Double.compare(this.radius,otherCircle.getRadius());
+
     }
 }
