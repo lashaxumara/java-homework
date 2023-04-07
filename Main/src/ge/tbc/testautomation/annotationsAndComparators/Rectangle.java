@@ -1,6 +1,8 @@
 package ge.tbc.testautomation.annotationsAndComparators;
 
-public class Rectangle {
+import ge.tbc.testautomation.javaOOP.figures.Figures;
+
+public class Rectangle extends Figures {
     private double a;
     private double b;
 
@@ -20,11 +22,6 @@ public class Rectangle {
         this.b = b;
     }
 
-    @Override
-    public String toString() {
-        return "Rectangle area=" + getArea();
-    }
-
     public Rectangle(double a, double b) {
         this.a = a;
         this.b = b;
@@ -32,5 +29,23 @@ public class Rectangle {
 
     public double getArea() {
         return a * b;
+    }
+
+    @Override
+    public double getLength() {
+        return  (a + b)*2;
+    }
+
+    @Override
+    public void printPackageName() {
+        System.out.println(getClass().getPackage().getName());
+    }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "a=" + a +
+                ", b=" + b +
+                '}';
     }
 }
